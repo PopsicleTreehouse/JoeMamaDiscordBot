@@ -1,33 +1,36 @@
 import discord
+from discord.ext import commands
 from dotenv import load_dotenv
 from os import getenv
 from random import randint
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='-joe ')
 
 
-@client.event
+@bot.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game(name="To see source code use &src"))
-    print('We have logged in as {0.user}'.format(client))
+    await bot.change_presence(activity=discord.Game(name="Using prefix \'-joe\'"))
+    print('We have logged in as {0.user}'.format(bot))
 
 
-@client.event
+@bot.command(name="src", description="Returns source code link", )
+async def src(ctx):
+    await ctx.send("https://github.com/PopsicleTreehouse/JoeMamaDiscordBot")
+
+
+@bot.event
 async def on_message(message):
-    content = message.content
     validStrs = {"who\'s joe", "whos joe"}
-    validCmds = {
-        "&src": "https://github.com/PopsicleTreehouse/JoeMamaDiscordBot"}
-    if message.author == client.user:
+    if message.author == bot.user:
         return
-    if(content.startswith('&')):
-        await message.reply(validCmds[content])
-    elif any(x in content.lower() for x in validStrs):
+
+    if any(x in message.content.lower() for x in validStrs):
         if(randint(0, 1) == 1):
             await message.reply("Joe fuck yourself", mention_author=True)
         else:
             await message.reply("Joe mama", mention_author=True)
-        print(content)
+        print(message.content)
+    await bot.process_commands(message)
 
 load_dotenv()
-client.run(getenv('TOKEN'))
+bot.run(getenv('TOKEN'))
