@@ -25,10 +25,6 @@ async def on_message(message):
         else:
             await message.reply("Joe mama", mention_author=True)
         print(content)
-    if(content == "!stop"):
-        await message.channel.send("Stopped.")
-        print("bot stopped.")
-        await client.logout()
 
 load_dotenv()
 client.run(getenv('TOKEN'))
