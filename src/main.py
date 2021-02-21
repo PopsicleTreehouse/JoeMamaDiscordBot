@@ -1,6 +1,7 @@
 import discord
-import os
 from dotenv import load_dotenv
+from os import getenv
+from random import randint
 
 client = discord.Client()
 
@@ -19,13 +20,15 @@ async def on_message(message):
         return
 
     if any(x in content.lower() for x in validStrs):
-        await message.reply("Joe fuck yourself", mention_author=True)
+        if(randint(0, 1) == 1):
+            await message.reply("Joe fuck yourself", mention_author=True)
+        else:
+            await message.reply("Joe mama", mention_author=True)
         print(content)
-        print(message.author.id)
     if(content == "!stop"):
         await message.channel.send("Stopped.")
         print("bot stopped.")
         await client.logout()
 
 load_dotenv()
-client.run(os.getenv('TOKEN'))
+client.run(getenv('TOKEN'))
