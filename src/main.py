@@ -10,8 +10,7 @@ bot = commands.Bot(command_prefix='&')
 @bot.event
 async def on_ready():
     bot.start = True
-    await bot.change_presence(activity=discord.Game(
-        name="Type &help for help | Prefix \'&\'"))
+    await bot.change_presence(activity=discord.Game(name="Type &help for help | Prefix \'&\'"))
 
 
 @bot.event
@@ -26,10 +25,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-@bot.command(name="src",
-             brief="Returns source code link",
-             description="Returns a github link to the source code for the bot"
-             )
+@bot.command(name="src", brief="Returns source code link", description="Returns a github link to the source code for the bot")
 async def src(ctx):
     await ctx.send("https://github.com/PopsicleTreehouse/JoeMamaDiscordBot")
 
@@ -37,9 +33,7 @@ async def src(ctx):
 # Make this one method?
 
 
-@bot.command(name="stop",
-             brief="Stops the bot from running",
-             description="Stops the bot if it is currently running")
+@bot.command(name="stop", brief="Stops the bot from running", description="Stops the bot if it is currently running")
 @commands.is_owner()
 async def stop(ctx, master=""):
     if (bot.start):
@@ -49,9 +43,7 @@ async def stop(ctx, master=""):
         await ctx.send("Already stopped")
 
 
-@bot.command(name="start",
-             brief="Starts the bot",
-             description="Starts the bot if it is not currently running")
+@bot.command(name="start", brief="Starts the bot", description="Starts the bot if it is not currently running")
 @commands.is_owner()
 async def start(ctx):
     if (not bot.start):
