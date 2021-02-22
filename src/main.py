@@ -32,25 +32,16 @@ async def src(ctx):
 
 # Make this one method?
 
-
-@bot.command(name="stop", brief="Stops the bot from running", description="Stops the bot if it is currently running")
-@commands.is_owner()
-async def stop(ctx, master=""):
-    if (bot.start):
+@bot.command(name="cstate", brief="Starts or stops the bot")
+async def cstate(ctx, master=""):
+    if(master == "master"):
+        exit()
+    if(bot.start):
         bot.start = False
         await ctx.send("Stopped")
     else:
-        await ctx.send("Already stopped")
-
-
-@bot.command(name="start", brief="Starts the bot", description="Starts the bot if it is not currently running")
-@commands.is_owner()
-async def start(ctx):
-    if (not bot.start):
         bot.start = True
         await ctx.send("Started")
-    else:
-        await ctx.send("Already started")
 
 
 load_dotenv()
