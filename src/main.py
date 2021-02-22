@@ -10,7 +10,7 @@ bot = commands.Bot(command_prefix='&')
 @bot.event
 async def on_ready():
     bot.start = True
-    await bot.change_presence(activity=discord.Game(name="Type &help for help | Prefix \'&\'"))
+    await bot.change_presence(activity=discord.Game(name="&help"))
 
 
 @bot.event
